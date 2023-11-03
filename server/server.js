@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 app.use("/api/rawAssessmentScores",rawAssessmentScoresRouter)
-app.use("/api.userProfile", userProfileRouter)
+app.use("/api/userProfile", userProfileRouter)
 
 
 //Connect to MongoDB

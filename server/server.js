@@ -2,6 +2,8 @@ const express = require("express")
 const mongoose = require("mongoose")
 require("dotenv").config()
 
+const userProfileRouter = require("./routes/user_profile_router")
+
 //Create app
 const app = express()
 
@@ -16,6 +18,7 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
+app.use("/api.userProfile", userProfileRouter)
 
 //Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)

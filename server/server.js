@@ -2,11 +2,8 @@ const express = require("express")
 const mongoose = require("mongoose")
 require("dotenv").config()
 
-<<<<<<< HEAD
 const rawAssessmentScoresRouter = require("./routes/rawAssessmentScores_routes")
-=======
 const userProfileRouter = require("./routes/user_profile_router")
->>>>>>> af30af083ceb89cd3abc71f00027f513af9078dc
 
 //Create app
 const app = express()

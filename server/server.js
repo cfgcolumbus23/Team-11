@@ -3,17 +3,36 @@ const mongoose = require("mongoose")
 const cors = require("cors");
 require("dotenv").config()
 
-const app = express() 
+//Create app
+const app = express()
 
 app.use(cors());
 
+//Middleware
+app.use(express.json())
+app.use((req, res, next) => {
+    console.log(req.path, req.method)
+    next()
+})
+
+//Routes
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
+//Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
-.then(console.log("Connected to MongoDB"))
+    .then(() => {
+        console.log("Connected to MongoDB")
+        listen()
+    })
+    .catch((error) => {
+        console.log(error)
+    })
 
-app.listen(process.env.PORT, () => {
-    console.log("Listening on port", process.env.PORT)
-})
+//Listen
+const listen = () => {
+    app.listen(process.env.PORT, () => {
+        console.log("Listening on Port", process.env.PORT)
+    })
+}

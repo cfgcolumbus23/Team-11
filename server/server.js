@@ -1,13 +1,17 @@
 const express = require("express")
+const mongoose = require("mongoose")
 
-const app = express()
+require("dotenv").config()
 
-const port = 5000
+const app = express() 
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
-  })
+})
 
-app.listen(port, () => {
-    console.log("Listening on port", port)
+mongoose.connect(process.env.MONGODB_URI)
+.then(console.log("Connected to MongoDB"))
+
+app.listen(process.env.PORT, () => {
+    console.log("Listening on port", process.env.PORT)
 })

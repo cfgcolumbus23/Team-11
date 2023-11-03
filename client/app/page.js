@@ -1,7 +1,15 @@
+"use client";
 import Image from 'next/image'
 import Link from 'next/link'
-
+import axios from "axios";
+import { useState } from 'react';
 export default function Home() {
+  const [result, setResult] = useState("Loading...");
+  axios.get("http://localhost:7000/").then((response) => {
+    setResult(response.data);
+  }).catch((reason) => {
+    console.error("Error when connecting to server: " + reason);
+  });
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
@@ -103,6 +111,8 @@ export default function Home() {
             Send message to parent for student
           </p>
         </a>
+
+        <p>{result}</p>
       </div>
     </main>
   )

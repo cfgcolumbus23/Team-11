@@ -19,7 +19,7 @@ export function AddStudent(){
         <Form.Item label="Last Name" name="lastName">
             <Input />
         </Form.Item>
-        <Form.Item label="Date Picker" name="DOB">
+        <Form.Item label="Date of Birth" name="DOB">
             <DatePicker/>
         </Form.Item>
         <Form.Item>

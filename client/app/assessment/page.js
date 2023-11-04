@@ -1,7 +1,7 @@
 "use client";
-import { Form, Input, Select, Button } from "antd"
+import { Form, Input, Select, Button, InputNumber, DatePicker } from "antd"
 import React from 'react';
-
+import axios from "axios";
 const onFinish = () => {
     console.log("You submitted succesfully!");
 }
@@ -11,7 +11,9 @@ const onFinishFailed = () => {
 export default function Assessment() {
     const formRef = React.useRef(null);
     const onFinish = (values) => {
-        axios.post("http://localhost:3001/api/student/", values);
+        axios.post("http://localhost:3001/api/rawAssessmentScores", values).then((response) => {
+            console.log("Server response " + response)
+        })
     };
     return (
         <div>
@@ -27,8 +29,8 @@ export default function Assessment() {
                 autoComplete="off">
                 <h1>Form</h1>
                 <Form.Item
-                    label="Child's Name"
-                    name="childName"
+                    label="Student ID (TODO)"
+                    name="studentId"
                     rules={[
                         {
                             required: true,
@@ -39,8 +41,44 @@ export default function Assessment() {
                     <Input />
                 </Form.Item>
                 <Form.Item
+                    label="Date of exam"
+                    name="date"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input the exam date',
+                        },
+                    ]}
+                >
+                    <DatePicker />
+                </Form.Item>
+                <Form.Item
+                    label="School"
+                    name="school"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input the name of the school',
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    label="Teacher"
+                    name="teacher"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input the name of the teacher',
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
                     label="Personal Data Recognition"
-                    name="personalDataRec"
+                    name={["question_scores",0]}
                     rules={[
                         {
                             required: true,
@@ -48,18 +86,12 @@ export default function Assessment() {
                         },
                     ]}
                 >
-                    <Select placeholder="On a scale of 1 to 10">
-                        {Array.from({ length: 10 }, (_, index) => (
-                            <option key={index + 1} value={index + 1}>
-                                {index + 1}
-                            </option>
-                        ))}
-                    </Select>
+                    <InputNumber min={1} max={10} step={1} />
                 </Form.Item>
 
                 <Form.Item
                     label="Colour Recoginition"
-                    name="colourRec"
+                    name={["question_scores",1]}
                     rules={[
                         {
                             required: true,
@@ -67,18 +99,12 @@ export default function Assessment() {
                         },
                     ]}
                 >
-                    <Select placeholder="On a scale of 1 to 10">
-                        {Array.from({ length: 10 }, (_, index) => (
-                            <option key={index + 1} value={index + 1}>
-                                {index + 1}
-                            </option>
-                        ))}
-                    </Select>
+                    <InputNumber min={1} max={10} step={1}/>
                 </Form.Item>
 
                 <Form.Item
                     label="Picture Vocabulary"
-                    name="picVoc"
+                    name={["question_scores",2]}
                     rules={[
                         {
                             required: true,
@@ -86,37 +112,12 @@ export default function Assessment() {
                         },
                     ]}
                 >
-                    <Select placeholder="On a scale of 1 to 10">
-                        {Array.from({ length: 10 }, (_, index) => (
-                            <option key={index + 1} value={index + 1}>
-                                {index + 1}
-                            </option>
-                        ))}
-                    </Select>
-                </Form.Item>
-
-                <Form.Item
-                    label="Picture Recognition"
-                    name="picRec"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please select a number!',
-                        },
-                    ]}
-                >
-                    <Select placeholder="On a scale of 1 to 10">
-                        {Array.from({ length: 10 }, (_, index) => (
-                            <option key={index + 1} value={index + 1}>
-                                {index + 1}
-                            </option>
-                        ))}
-                    </Select>
+                    <InputNumber min={1} max={10} step={1}/>
                 </Form.Item>
 
                 <Form.Item
                     label="Visual Discrimination"
-                    name="visDisc"
+                    name={["question_scores",3]}
                     rules={[
                         {
                             required: true,
@@ -124,18 +125,12 @@ export default function Assessment() {
                         },
                     ]}
                 >
-                    <Select placeholder="On a scale of 1 to 10">
-                        {Array.from({ length: 10 }, (_, index) => (
-                            <option key={index + 1} value={index + 1}>
-                                {index + 1}
-                            </option>
-                        ))}
-                    </Select>
+                    <InputNumber min={1} max={10} step={1}/>
                 </Form.Item>
 
                 <Form.Item
                     label="Visual-Motor Skills"
-                    name="visMotorSkills"
+                    name={["question_scores",4]}
                     rules={[
                         {
                             required: true,
@@ -143,18 +138,12 @@ export default function Assessment() {
                         },
                     ]}
                 >
-                    <Select placeholder="On a scale of 1 to 10">
-                        {Array.from({ length: 10 }, (_, index) => (
-                            <option key={index + 1} value={index + 1}>
-                                {index + 1}
-                            </option>
-                        ))}
-                    </Select>
+                    <InputNumber min={1} max={10} step={1}/>
                 </Form.Item>
 
                 <Form.Item
                     label="Gross-Motor Skills"
-                    name="grossMotSkills"
+                    name={["question_scores",5]}
                     rules={[
                         {
                             required: true,
@@ -162,18 +151,12 @@ export default function Assessment() {
                         },
                     ]}
                 >
-                    <Select placeholder="On a scale of 1 to 10">
-                        {Array.from({ length: 10 }, (_, index) => (
-                            <option key={index + 1} value={index + 1}>
-                                {index + 1}
-                            </option>
-                        ))}
-                    </Select>
+                    <InputNumber min={1} max={10} step={1}/>
                 </Form.Item>
 
                 <Form.Item
                     label="Rote Counting"
-                    name="roteCount"
+                    name={["question_scores",6]}
                     rules={[
                         {
                             required: true,
@@ -181,18 +164,12 @@ export default function Assessment() {
                         },
                     ]}
                 >
-                    <Select placeholder="On a scale of 1 to 10">
-                        {Array.from({ length: 10 }, (_, index) => (
-                            <option key={index + 1} value={index + 1}>
-                                {index + 1}
-                            </option>
-                        ))}
-                    </Select>
+                    <InputNumber min={1} max={10} step={1}/>
                 </Form.Item>
 
                 <Form.Item
                     label="Identifies Body Parts"
-                    name="idBodyPart"
+                    name={["question_scores",7]}
                     rules={[
                         {
                             required: true,
@@ -200,18 +177,12 @@ export default function Assessment() {
                         },
                     ]}
                 >
-                    <Select placeholder="On a scale of 1 to 10">
-                        {Array.from({ length: 10 }, (_, index) => (
-                            <option key={index + 1} value={index + 1}>
-                                {index + 1}
-                            </option>
-                        ))}
-                    </Select>
+                    <InputNumber min={1} max={10} step={1}/>
                 </Form.Item>
 
                 <Form.Item
                     label="Follows Verbal Directions"
-                    name="followDirec"
+                    name={["question_scores",8]}
                     rules={[
                         {
                             required: true,
@@ -219,18 +190,12 @@ export default function Assessment() {
                         },
                     ]}
                 >
-                    <Select placeholder="On a scale of 1 to 10">
-                        {Array.from({ length: 10 }, (_, index) => (
-                            <option key={index + 1} value={index + 1}>
-                                {index + 1}
-                            </option>
-                        ))}
-                    </Select>
+                    <InputNumber min={1} max={10} step={1}/>
                 </Form.Item>
 
                 <Form.Item
                     label="Numeral Comprehension"
-                    name="numComp"
+                    name={["question_scores",9]}
                     rules={[
                         {
                             required: true,
@@ -238,18 +203,12 @@ export default function Assessment() {
                         },
                     ]}
                 >
-                    <Select placeholder="On a scale of 1 to 10">
-                        {Array.from({ length: 10 }, (_, index) => (
-                            <option key={index + 1} value={index + 1}>
-                                {index + 1}
-                            </option>
-                        ))}
-                    </Select>
+                    <InputNumber min={1} max={10} step={1}/>
                 </Form.Item>
 
                 <Form.Item
                     label="Prints Personal Data"
-                    name="printData"
+                    name={["question_scores",10]}
                     rules={[
                         {
                             required: true,
@@ -257,18 +216,12 @@ export default function Assessment() {
                         },
                     ]}
                 >
-                    <Select placeholder="On a scale of 1 to 10">
-                        {Array.from({ length: 10 }, (_, index) => (
-                            <option key={index + 1} value={index + 1}>
-                                {index + 1}
-                            </option>
-                        ))}
-                    </Select>
+                    <InputNumber min={1} max={10} step={1}/>
                 </Form.Item>
 
                 <Form.Item
                     label="Syntax and Fluency"
-                    name="syntaxFluency"
+                    name={["question_scores",11]}
                     rules={[
                         {
                             required: true,
@@ -276,13 +229,25 @@ export default function Assessment() {
                         },
                     ]}
                 >
-                    <Select placeholder="On a scale of 1 to 10">
-                        {Array.from({ length: 10 }, (_, index) => (
-                            <option key={index + 1} value={index + 1}>
-                                {index + 1}
-                            </option>
-                        ))}
-                    </Select>
+                    <InputNumber min={1} max={10} step={1}/>
+                </Form.Item>
+                <Form.Item
+                    label="Observations"
+                    name="observations"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please observations',
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    label="Recommendations"
+                    name="recommendations"
+                >
+                    <Input />
                 </Form.Item>
 
                 <Form.Item>

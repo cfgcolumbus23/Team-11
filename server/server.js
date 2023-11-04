@@ -1,5 +1,6 @@
 const express = require("express")
 const mongoose = require("mongoose")
+const cors = require("cors");
 require("dotenv").config()
 
 const rawAssessmentScoresRouter = require("./routes/rawAssessmentScores_routes")
@@ -8,6 +9,8 @@ const studentRouter = require("./routes/studentRouter")
 
 //Create app
 const app = express()
+
+app.use(cors());
 
 //Middleware
 app.use(express.json())

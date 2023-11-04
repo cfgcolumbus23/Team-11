@@ -5,7 +5,7 @@ const getreport = async (req, res) => {
     const {studentId} = req.params;
     try {
         const assessmentScores = await rawAssessmentScoresModel.findOne({studentId});
-        const testId = 2;//assessmentScores.testId;
+        const testId = assessmentScores.testId;
         const questions = await assessmentQuestionsModel.findOne({testId});
         const answersList = assessmentScores.question_scores;
         
@@ -19,6 +19,7 @@ const getreport = async (req, res) => {
         social_score_student = 0;
         reading_score_student = 0;
 
+        console.log(answersList);
         questions.questions.forEach((element, i) => {
             curr_category = element.questionCategory;
             curr_points = element.totalPoints;
@@ -33,12 +34,33 @@ const getreport = async (req, res) => {
                 physical_points += curr_points;
                 physical_score_student += answersList[i];
             } else {
-                social_points += "socialemotional";
+                social_points += curr_points;
                 social_score_student += answersList[i];
             }
         })
 
-        res.status(200).json({reading_score_student});
+        const math_percent = math_score_student/math_points * 100;
+        const reading_percent = reading_score_student/reading_points* 100;
+        const physical_percent = physical_score_student/physical_points* 100;
+        const social_percent = social_score_student/social_points * 100;
+
+        const percentArr = [math_percent, reading_percent, physical_percent, social_percent];
+        recs = givingRecommendations(percentArr);
+
+        const recommendations = {
+            "Math":recs.get("Math"),
+            "Reading":recs.get("Reading"),
+            "Physical":recs.get("Physical"),
+            "Social/Emotional":recs.get("Social/Emotional")
+        };
+        const results = {
+            "Math":math_percent,
+            "Reading":reading_percent,
+            "Physical":physical_percent,
+            "Social/Emotional":social_percent
+        };
+
+        res.status(200).json({recommendations, results});
     } catch (error) {
         res.status(400).json({error:error.message});
     }
@@ -48,57 +70,38 @@ module.exports = {
     getreport
 }
 
-// const categorizing = () => {
+const givingRecommendations = (percentArray) => {
+    recommendations = new Map();
+    if (percentArray[0] <= 50) {
+        recommendations.set("Math", "Educational Psychologist");
+    } else if (percentArray[0] <= 75) {
+        recommendations.set("Math", "Math Tutor");
+    } else {
+        recommendations.set("Math", "None");
+    }
 
-//     const recommendations = new Array(4);
+    if (percentArray[1] <= 50) {
+        recommendations.set("Reading", "Speech Language Pathologist");
+        reading_rating = "Below Average";
+    } else if (percentArray[1] <= 75) {
+        recommendations.set("Reading", "Local Library");
+    } else {
+        recommendations.set("Reading", "None");
+    }
 
-//     if (physical_total <= 8) {
-//         recommendations[0] = "Neurologist";
-//         physical_rating = "Below Average";
-//     } else if (physical_total <= 11) {
-//         recommendations[0] = "Physical Therapy";
-//         physical_rating = "Slightly Below Average";
-//     } else {
-//         recommendations[0] = "None";
-//         physical_rating = "Great";
-//     }
+    if (percentArray[2] <= 50) {
+        recommendations.set("Physical", "Neurologist");
+    } else if (percentArray[2] <= 75) {
+        recommendations.set("Physical", "Physical Therapy");
+    } else {
+        recommendations.set("Physical", "None");
+    }
 
-//     if (social_total <= 18) {
-//         recommendations[1] = "Educational Psychologist";
-//         social_rating = "Below Average";
-//     } else {
-//         recommendations[1] = "None";
-//         social_rating = "Great";
-//     }
+    if (percentArray[3] <= 65) {
+        recommendations.set("Social/Emotional", "Educational Psychologist");
+    } else {
+        recommendations.set("Social/Emotional", "None");
+    }
 
-//     if (math_total <= 8) {
-//         recommendations[2] = "Educational Psychologist";
-//         math_rating = "Below Average";
-//     } else if (math_total <= 11) {
-
-//         recommendations[2] = "Math Tutor";
-//         math_rating = "Slightly Below Average";
-//     } else {
-//         recommendations[2] = "None";
-//         math_rating = "Great";
-//     }
-
-//     if (reading_total <= 33) {
-//         recommendations[3] = "Speech Language Pathologist";
-//         reading_rating = "Below Average";
-//     } else if (reading_total <= 38) {
-//         recommendations[3] = "Local Library";
-//         reading_rating = "Slightly Below Average";
-//     } else {
-//         recommendations[3] = "None";
-//         reading_rating = "Great"
-//     }
-//     returningValues = {
-//         recommendations,
-//         physical_rating,
-//         social_rating,
-//         math_rating,
-//         reading_rating
-//     }
-//     return returningValues;
-// }
+    return recommendations;
+}

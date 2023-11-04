@@ -7,4 +7,5 @@ const router = express.Router()
 
 router.get("/:studentId", getreport)
 
+
 module.exports = router

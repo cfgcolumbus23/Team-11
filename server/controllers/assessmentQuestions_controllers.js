@@ -1,6 +1,6 @@
 const assessmentQuestionsModel = require("../models/assessmentQuestions_models")
 
-//Add one assessment question
+//Add one assessment question (format)
 const addAssessmentQuestion = async (req, res) => {
     const {
         testId,
@@ -18,7 +18,7 @@ const addAssessmentQuestion = async (req, res) => {
     }
 }
 
-//Get all assessment questions
+//Get all assessment question (formats)
 const getAssessmentQuestions = async (req, res) => {
     const {testId}=req.params
 
@@ -31,6 +31,7 @@ const getAssessmentQuestions = async (req, res) => {
     }
 }
 
+//Get all assessments format names
 const getAssessmentIds = async (req, res) => {
     try{
         const assessments = await assessmentQuestionsModel.find()

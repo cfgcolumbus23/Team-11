@@ -1,6 +1,6 @@
 const studentModels = require("../models/student_models");
 
-// make students
+//Make students
 const makeStudent = async (req, res) => {
   const { 
     firstName, 
@@ -62,24 +62,8 @@ const getStudentsbyId = async (req, res) => {
   }
 };
 
-const addAssessmentToStudent = async (studentId, assessmentId) => {
-  
-    // Find the student by their ID
-    const student = await studentModels.findOne({_id:studentId});
-    const assessmentIdList = student.assessments
-    assessmentIdList.push(assessmentId.toString())
-    const updatedStudent = studentModels.findOneAndUpdate({studentId},{assessments: assessmentIdList})
-
-    console.log(assessmentIdList[-1])
-
-    if (!updatedStudent) {
-      return console.log("Student not found")
-    }
-};
-
 module.exports = {
   makeStudent,
   getStudents,
-  getStudentsbyId,
-  addAssessmentToStudent
+  getStudentsbyId
 };

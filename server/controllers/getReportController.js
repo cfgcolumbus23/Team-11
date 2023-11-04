@@ -1,94 +1,87 @@
 const assessmentQuestionsModel = require("../models/assessmentQuestions_models");
 const rawAssessmentScoresModel = require("../models/rawAssessmentScores_models");
 
-const getReports = async (req,res) => {
-    const {studentId} = req.params;
+//Get processed reports from assessments
+const getReports = async (req, res) => {
+    const { studentId } = req.params;
     try {
-        const assessmentScores = await rawAssessmentScoresModel.find({studentId})
+        const assessmentScores = await rawAssessmentScoresModel.find({ studentId })
         const results = await Promise.all(
             assessmentScores.map(async (assessmentScore) => {
-            const testId = assessmentScore.testId
-            const questions = await assessmentQuestionsModel.findOne({testId})
-            const answersList = assessmentScore.question_scores
-            return(getreport(questions, answersList))
+                const testId = assessmentScore.testId
+                const questions = await assessmentQuestionsModel.findOne({ testId })
+                const answersList = assessmentScore.question_scores
+                return (getreport(questions, answersList))
             })
         );
         console.log(results)
-        res.status(200).json({results})
+        res.status(200).json({ results })
     }
-    catch(error){
-        res.status(400).json({error: error.message})
+    catch (error) {
+        res.status(400).json({ error: error.message })
     }
 }
 
+//Get processed results from a single report
 const getreport = (questions, answersList) => {
-    //const {studentId} = req.params;
-    try {
-        //const assessmentScores = await rawAssessmentScoresModel.findOne({studentId});
-        //const testId = assessmentScores.testId;
-        //const questions = await assessmentQuestionsModel.findOne({testId});
-        //const answersList = assessmentScores.question_scores;
-        
-        math_points = 0;
-        physical_points = 0;
-        social_points = 0;
-        reading_points = 0;
 
-        math_score_student = 0;
-        physical_score_student = 0;
-        social_score_student = 0;
-        reading_score_student = 0;
+    math_points = 0;
+    physical_points = 0;
+    social_points = 0;
+    reading_points = 0;
 
-        questions.questions.forEach((element, i) => {
-            curr_category = element.questionCategory;
-            curr_points = element.totalPoints;
+    math_score_student = 0;
+    physical_score_student = 0;
+    social_score_student = 0;
+    reading_score_student = 0;
 
-            if (curr_category == "math") {
-                math_points += curr_points;
-                math_score_student += answersList[i];
-            } else if (curr_category == "reading") {
-                reading_points += curr_points;
-                reading_score_student += answersList[i];
-            } else if (curr_category == "physical") {
-                physical_points += curr_points;
-                physical_score_student += answersList[i];
-            } else {
-                social_points += curr_points;
-                social_score_student += answersList[i];
-            }
-        })
+    questions.questions.forEach((element, i) => {
+        curr_category = element.questionCategory;
+        curr_points = element.totalPoints;
 
-        const math_percent = math_score_student/math_points * 100;
-        const reading_percent = reading_score_student/reading_points* 100;
-        const physical_percent = physical_score_student/physical_points* 100;
-        const social_percent = social_score_student/social_points * 100;
+        if (curr_category == "math") {
+            math_points += curr_points;
+            math_score_student += answersList[i];
+        } else if (curr_category == "reading") {
+            reading_points += curr_points;
+            reading_score_student += answersList[i];
+        } else if (curr_category == "physical") {
+            physical_points += curr_points;
+            physical_score_student += answersList[i];
+        } else {
+            social_points += curr_points;
+            social_score_student += answersList[i];
+        }
+    })
 
-        const percentArr = [math_percent, reading_percent, physical_percent, social_percent];
-        recs = givingRecommendations(percentArr);
+    const math_percent = math_score_student / math_points * 100;
+    const reading_percent = reading_score_student / reading_points * 100;
+    const physical_percent = physical_score_student / physical_points * 100;
+    const social_percent = social_score_student / social_points * 100;
 
-        const recommendations = {
-            "Math":recs.get("Math"),
-            "Reading":recs.get("Reading"),
-            "Physical":recs.get("Physical"),
-            "Socialemotional":recs.get("Social/Emotional")
-        };
-        const results = {
-            "Math":math_percent,
-            "Reading":reading_percent,
-            "Physical":physical_percent,
-            "Socialemotional":social_percent
-        };
-        return ({recommendations,results})
-        //res.status(200).json({recommendations, results});
-    } catch (error) {
-       // res.status(400).json({error:error.message});
-    }
+    const percentArr = [math_percent, reading_percent, physical_percent, social_percent];
+    recs = givingRecommendations(percentArr);
+
+    const recommendations = {
+        "Math": recs.get("Math"),
+        "Reading": recs.get("Reading"),
+        "Physical": recs.get("Physical"),
+        "Socialemotional": recs.get("Social/Emotional")
+    };
+    const results = {
+        "Math": math_percent,
+        "Reading": reading_percent,
+        "Physical": physical_percent,
+        "Socialemotional": social_percent
+    };
+    return ({ recommendations, results })
 }
 
 module.exports = {
     getReports
 }
 
+//Give recomendations for a single reports
 const givingRecommendations = (percentArray) => {
     recommendations = new Map();
     if (percentArray[0] <= 50) {

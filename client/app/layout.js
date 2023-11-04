@@ -23,9 +23,9 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <body className={inter.className}>
           <Layout>
-            <Header style={{ display: 'flex', alignItems: 'center' }}>
+            <Header style={{ alignItems: 'center' }}>
             <Menu
-            defaultSelectedKeys={['2']}
+            defaultSelectedKeys={['1']}
             theme="dark"
             mode="horizontal"
             items={items}

@@ -1,13 +1,33 @@
 const assessmentQuestionsModel = require("../models/assessmentQuestions_models");
 const rawAssessmentScoresModel = require("../models/rawAssessmentScores_models");
 
-const getreport = async (req, res) => {
+const getReports = async (req,res) => {
     const {studentId} = req.params;
     try {
-        const assessmentScores = await rawAssessmentScoresModel.findOne({studentId});
-        const testId = assessmentScores.testId;
-        const questions = await assessmentQuestionsModel.findOne({testId});
-        const answersList = assessmentScores.question_scores;
+        const assessmentScores = await rawAssessmentScoresModel.find({studentId})
+        const results = await Promise.all(
+            assessmentScores.map(async (assessmentScore) => {
+            const testId = assessmentScore.testId
+            const questions = await assessmentQuestionsModel.findOne({testId})
+            const answersList = assessmentScore.question_scores
+            return(getreport(questions, answersList))
+            })
+        );
+        console.log(results)
+        res.status(200).json({results})
+    }
+    catch(error){
+        res.status(400).json({error: error.message})
+    }
+}
+
+const getreport = (questions, answersList) => {
+    //const {studentId} = req.params;
+    try {
+        //const assessmentScores = await rawAssessmentScoresModel.findOne({studentId});
+        //const testId = assessmentScores.testId;
+        //const questions = await assessmentQuestionsModel.findOne({testId});
+        //const answersList = assessmentScores.question_scores;
         
         math_points = 0;
         physical_points = 0;
@@ -19,7 +39,6 @@ const getreport = async (req, res) => {
         social_score_student = 0;
         reading_score_student = 0;
 
-        console.log(answersList);
         questions.questions.forEach((element, i) => {
             curr_category = element.questionCategory;
             curr_points = element.totalPoints;
@@ -59,15 +78,17 @@ const getreport = async (req, res) => {
             "Physical":physical_percent,
             "Socialemotional":social_percent
         };
-
-        res.status(200).json({recommendations, results});
+        return ({recommendations,results})
+        console.log(recommendations)
+        console.log(results)
+        //res.status(200).json({recommendations, results});
     } catch (error) {
-        res.status(400).json({error:error.message});
+       // res.status(400).json({error:error.message});
     }
 }
 
 module.exports = {
-    getreport
+    getReports
 }
 
 const givingRecommendations = (percentArray) => {

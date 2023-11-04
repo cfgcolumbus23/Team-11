@@ -1,11 +1,11 @@
 const express = require("express")
 const {
-    getreport
+    getReports
 } = require("../controllers/getReportController")
 
 const router = express.Router()
 
-router.get("/:studentId", getreport)
+router.get("/:studentId", getReports)
 
 
 module.exports = router

@@ -1,5 +1,7 @@
 "use client";
-import { Form, Input, Select } from "antd"
+import { Form, Input, Select, Button } from "antd"
+import React from 'react';
+
 const onFinish = () => {
     console.log("You submitted succesfully!");
 }
@@ -7,10 +9,15 @@ const onFinishFailed = () => {
     console.error("There was an error in the submission!!");
 }
 export default function Assessment() {
+    const formRef = React.useRef(null);
+    const onFinish = (values) => {
+        axios.post("http://localhost:3001/api/student/", values);
+    };
     return (
         <div>
             <p>Please input something :)</p>
             <Form name="basic"
+                ref={formRef}
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
                 style={{ maxWidth: 600 }}
@@ -61,7 +68,7 @@ export default function Assessment() {
                     ]}
                 >
                     <Select placeholder="On a scale of 1 to 10">
-                    {Array.from({ length: 10 }, (_, index) => (
+                        {Array.from({ length: 10 }, (_, index) => (
                             <option key={index + 1} value={index + 1}>
                                 {index + 1}
                             </option>
@@ -80,7 +87,7 @@ export default function Assessment() {
                     ]}
                 >
                     <Select placeholder="On a scale of 1 to 10">
-                    {Array.from({ length: 10 }, (_, index) => (
+                        {Array.from({ length: 10 }, (_, index) => (
                             <option key={index + 1} value={index + 1}>
                                 {index + 1}
                             </option>
@@ -194,7 +201,7 @@ export default function Assessment() {
                     ]}
                 >
                     <Select placeholder="On a scale of 1 to 10">
-                    {Array.from({ length: 10 }, (_, index) => (
+                        {Array.from({ length: 10 }, (_, index) => (
                             <option key={index + 1} value={index + 1}>
                                 {index + 1}
                             </option>
@@ -202,7 +209,7 @@ export default function Assessment() {
                     </Select>
                 </Form.Item>
 
-                <Form.Item 
+                <Form.Item
                     label="Follows Verbal Directions"
                     name="followDirec"
                     rules={[
@@ -211,9 +218,9 @@ export default function Assessment() {
                             message: 'Please select a number!',
                         },
                     ]}
-                    >
+                >
                     <Select placeholder="On a scale of 1 to 10">
-                    {Array.from({ length: 10 }, (_, index) => (
+                        {Array.from({ length: 10 }, (_, index) => (
                             <option key={index + 1} value={index + 1}>
                                 {index + 1}
                             </option>
@@ -221,7 +228,7 @@ export default function Assessment() {
                     </Select>
                 </Form.Item>
 
-                <Form.Item 
+                <Form.Item
                     label="Numeral Comprehension"
                     name="numComp"
                     rules={[
@@ -230,9 +237,9 @@ export default function Assessment() {
                             message: 'Please select a number!',
                         },
                     ]}
-                    >
+                >
                     <Select placeholder="On a scale of 1 to 10">
-                    {Array.from({ length: 10 }, (_, index) => (
+                        {Array.from({ length: 10 }, (_, index) => (
                             <option key={index + 1} value={index + 1}>
                                 {index + 1}
                             </option>
@@ -240,7 +247,7 @@ export default function Assessment() {
                     </Select>
                 </Form.Item>
 
-                <Form.Item 
+                <Form.Item
                     label="Prints Personal Data"
                     name="printData"
                     rules={[
@@ -249,9 +256,9 @@ export default function Assessment() {
                             message: 'Please select a number!',
                         },
                     ]}
-                    >
+                >
                     <Select placeholder="On a scale of 1 to 10">
-                    {Array.from({ length: 10 }, (_, index) => (
+                        {Array.from({ length: 10 }, (_, index) => (
                             <option key={index + 1} value={index + 1}>
                                 {index + 1}
                             </option>
@@ -259,7 +266,7 @@ export default function Assessment() {
                     </Select>
                 </Form.Item>
 
-                <Form.Item 
+                <Form.Item
                     label="Syntax and Fluency"
                     name="syntaxFluency"
                     rules={[
@@ -268,14 +275,20 @@ export default function Assessment() {
                             message: 'Please select a number!',
                         },
                     ]}
-                    >
+                >
                     <Select placeholder="On a scale of 1 to 10">
-                    {Array.from({ length: 10 }, (_, index) => (
+                        {Array.from({ length: 10 }, (_, index) => (
                             <option key={index + 1} value={index + 1}>
                                 {index + 1}
                             </option>
                         ))}
                     </Select>
+                </Form.Item>
+
+                <Form.Item>
+                    <Button type="primary" htmlType="submit">
+                        Submit
+                    </Button>
                 </Form.Item>
 
             </Form>

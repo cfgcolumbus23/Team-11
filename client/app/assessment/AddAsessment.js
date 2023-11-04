@@ -14,14 +14,14 @@ export function AddAsessment({ testId }){
     const [questions, setQuestions] = useState([]);
     useEffect(() => {
         axios.get("http://localhost:3001/api/assessmentQuestions/" + testId).then((response) => {
-            console.log(response.data);
-            setQuestions(response.data);
+            setQuestions(response.data.questions);
         });
     }, [axios, testId]);
     const onFinish = (values) => {
         axios.post("http://localhost:3001/api/rawAssessmentScores", {testId, ...values}).then((response) => {
             console.log("Server response " + response)
         });
+        
     };
     return (<Form name="basic"
     ref={formRef}
@@ -93,7 +93,7 @@ export function AddAsessment({ testId }){
                 },
             ]}
         >
-            <InputNumber max={question.totalPoints} step={question.pointsIncrement} />
+            <InputNumber min={0} max={question.totalPoints} step={question.pointsIncrement} />
         </Form.Item>
         ))
     }

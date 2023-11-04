@@ -4,6 +4,7 @@ require("dotenv").config()
 
 const rawAssessmentScoresRouter = require("./routes/rawAssessmentScores_routes")
 const userProfileRouter = require("./routes/user_profile_router")
+const studentRouter = require("./routes/studentRouter")
 
 //Create app
 const app = express()
@@ -19,8 +20,10 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
+
 app.use("/api/rawAssessmentScores",rawAssessmentScoresRouter)
 app.use("/api/userProfile", userProfileRouter)
+app.use("/api/student", studentRouter)
 
 
 //Connect to MongoDB

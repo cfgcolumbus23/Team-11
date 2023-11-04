@@ -20,7 +20,7 @@ router.get("/", getStudents)
 
 router.get("/:studentId", getStudentsbyId)
 
-router.put("/:studentId/:testId", addAssessmentToStudent)
+//router.put("/:studentId/:testId", addAssessmentToStudent)
 
 
 module.exports = router

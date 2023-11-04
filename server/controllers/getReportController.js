@@ -1,13 +1,11 @@
-const rawAssessmentScoresModel = require("../models/rawAssessmentScores_models");
+const rawAssessmentScoresModel = require("../models/assessmentQuestions_models");
 
 const getreport = async (req, res) => {
-    console.log("hi");
     const {studentId} = req.params;
-    console.log(studentId)
     try {
-        const rawAssessmentScores = await rawAssessmentScoresModel.findOne({studentId});
-        
-        res.status(200).json({questionScores:rawAssessmentScores.question_scores});
+        const assessmentScores = await rawAssessmentScoresModel.findOne({studentId});
+        console.log(assessmentScores);
+        res.status(200).json({questionScores:rawAssessmentScoresModel.question_scores});
     } catch (error) {
         res.status(400).json({error:error.message});
     }

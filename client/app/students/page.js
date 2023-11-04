@@ -3,8 +3,8 @@ import { StudentList } from './StudentList';
 export default function StudentReports() {
   return (
     <div>
-      <p>Here are all of your students</p>
-      <h2>Student Reports</h2>
+      <h2>Students</h2>
+      <p>Below is a list of all of your students</p>
       <StudentList />
     </div>
   );

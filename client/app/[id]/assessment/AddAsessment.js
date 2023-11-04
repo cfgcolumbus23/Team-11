@@ -3,8 +3,10 @@ import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
 import { Form, Input, Button, InputNumber, DatePicker, Select, message} from "antd"
-
+import { usePathname } from "next/navigation";
 export function AddAsessment({ testId }){
+    const pathname = usePathname().split("/");
+    const studentId = pathname[pathname.length - 2];
     const [messageApi, contextHolder] = message.useMessage();
     const success = () => {
         messageApi.open({
@@ -20,15 +22,14 @@ export function AddAsessment({ testId }){
     };
     const formRef = React.useRef(null);
     const [questions, setQuestions] = useState([]);
-    const [allowedStudentIds, setAllowedStudentIds] = useState([]);
-    useEffect(() => {
-        axios.get("http://localhost:3001/api/student").then((response) => {
-            setAllowedStudentIds(response.data.map(data => ({
-                label: `${data.firstName} ${data.lastName}`,
-                value: data._id,
-            })))
-        });
-    }, [axios, testId]);
+    const [student, setStudent] = useState([]);
+    useEffect(
+        () => {
+            axios.get("http://localhost:3001/api/student/" + studentId).then((response) => {
+                setStudent(response.data);
+            });
+        }, [axios, pathname]
+    );
     useEffect(() => {
         axios.get("http://localhost:3001/api/assessmentQuestions/questions/" + testId).then((response) => {
             setQuestions(response.data.questions);
@@ -64,7 +65,13 @@ export function AddAsessment({ testId }){
             },
         ]}
     >
-        <Select options={allowedStudentIds}/>
+        <Select defaultValue={studentId} options={
+            [{
+                label: `${student.firstName} ${student.lastName}`,
+                value: studentId,
+                //For indicating to user that a student is already selected
+            }]
+        }/>
     </Form.Item>
     <Form.Item
         label="Date of exam"

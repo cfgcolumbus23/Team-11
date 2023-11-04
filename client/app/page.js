@@ -1,62 +1,11 @@
-"use client";
-import Link from 'next/link'
-export default function Home() {
+import React from 'react';
+import { StudentList } from './StudentList';
+export default function StudentReports() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-
-        <Link
-          href="students"
-          className="text-black group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Student List{' '}
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            View the students in your class
-          </p>
-        </Link>
-
-        <Link
-          href="assessment"
-          className="text-black group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Assessment{' '}
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Fill out a form for a student to calculate relevant scores.
-          </p>
-        </Link>
-
-        <Link
-          href="recommendations"
-          className="text-black group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Recommendations{' '}
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Given a student and their scores, give resources
-          </p>
-        </Link>
-
-        <Link
-          href="contact"
-          className="text-black group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Contact{' '}
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Send message to parent for student
-          </p>
-        </Link>
-      </div>
-    </main>
-  )
+    <div>
+      <h2>Students</h2>
+      <p>Below is a list of all of your students</p>
+      <StudentList />
+    </div>
+  );
 }

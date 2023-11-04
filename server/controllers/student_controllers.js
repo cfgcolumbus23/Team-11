@@ -32,7 +32,7 @@ const makeStudent = async (req, res) => {
 // Get a list of students
 const getStudents = async (req, res) => {
   try {
-    const students = await studentModels.find({});
+    const students = await studentModels.find();
     
     if (students.length === 0) {
       return res.status(404).json({ message: 'No students found.' });
@@ -69,6 +69,8 @@ const addAssessmentToStudent = async (studentId, assessmentId) => {
     const assessmentIdList = student.assessments
     assessmentIdList.push(assessmentId.toString())
     const updatedStudent = studentModels.findOneAndUpdate({studentId},{assessments: assessmentIdList})
+
+    console.log(assessmentIdList[-1])
 
     if (!updatedStudent) {
       return console.log("Student not found")

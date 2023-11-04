@@ -65,14 +65,14 @@ const getStudentsbyId = async (req, res) => {
 function addAssessmentToStudent(studentId, assessmentId){
   
     // Find the student by their ID
-    const student = studentModels.findById(studentId);
+    const student = studentModels.findOne({studentId});
+    const assessmentIdList = student.assessments
+    assessmentIdList.push(assessmentId)
+    const updatedStudent = studentModels.findOneAndUpdate({studentId},{assessments: assessmentIdList})
 
-    if (!student) {
+    if (!updatedStudent) {
       return console.log("Student not found")
     }
-
-    // Find the assessment by its ID
-    student.assessments.push(assessmentId)
 };
 
 module.exports = {

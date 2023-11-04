@@ -28,7 +28,7 @@ export function AddAsessment({ testId }){
             axios.get("http://localhost:3001/api/student/" + studentId).then((response) => {
                 setStudent(response.data);
             });
-        }, [axios, pathname]
+        }, [axios, studentId]
     );
     useEffect(() => {
         axios.get("http://localhost:3001/api/assessmentQuestions/questions/" + testId).then((response) => {

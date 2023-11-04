@@ -70,12 +70,16 @@ export function StudentList() {
       key: 'actions',
       render: (record) => (
         <Space>
-          <Button type="primary" disabled={!record.assessments.length}>
-            <Link href={`/${record._id}/report`}>View Report</Link>
-          </Button>
-          <Button type="primary">
-            <Link href={`/${record._id}/assessment`}>Create Assessment</Link>
-          </Button>
+          <Link href={`/${record._id}/report`}>
+            <Button type="primary" disabled={!record.assessments.length}>
+              View Report
+            </Button>
+          </Link>
+          <Link href={`/${record._id}/assessment`}>
+            <Button type="primary">
+              Create Assessment
+            </Button>
+          </Link>
           <Button type="default" onClick={() => showModal(record)}>
             Contact Info
           </Button>

@@ -1,5 +1,5 @@
 const rawAssessmentScoresModel = require("../models/rawAssessmentScores_models")
-const {addAssessmentToStudent} = require("../controllers/student_controllers")
+const student_models = require("../models/student_models")
 
 //Add an assessment
 const addRawAssesmentScore = async (req, res) => {
@@ -25,6 +25,9 @@ const addRawAssesmentScore = async (req, res) => {
             observations,
             recommendations
         })
+
+        const temp = await student_models.findByIdAndUpdate({_id: studentId}, {$push: {assessments: rawAssessmentScore._id}})
+
         res.status(200).json(rawAssessmentScore)
     } catch (error) {
         res.status(400).json({ error: error.message })

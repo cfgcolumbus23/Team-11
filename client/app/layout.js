@@ -29,8 +29,11 @@ export default function RootLayout({ children }) {
         <body className={inter.className}>
           <Layout>
             <Header style={{ alignItems: 'center' }}>
-              <div className="flex gap-10 items-center">
+              <div className="flex gap-7 items-center">
                 <Image src="/frfLogo.png" width={50} height={50}/> 
+                <Link href="/">
+                  <b className="text-white text-lg">Future Connect</b>
+                </Link>
                 <Menu
                 className="flex-grow"
                 defaultSelectedKeys={['1']}

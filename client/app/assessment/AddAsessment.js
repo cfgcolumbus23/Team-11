@@ -22,7 +22,7 @@ export function AddAsessment({ testId }){
         });
     }, [axios, testId]);
     useEffect(() => {
-        axios.get("http://localhost:3001/api/assessmentQuestions/" + testId).then((response) => {
+        axios.get("http://localhost:3001/api/assessmentQuestions/questions/" + testId).then((response) => {
             setQuestions(response.data.questions);
         });
     }, [axios, testId]);

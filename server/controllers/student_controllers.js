@@ -1,4 +1,5 @@
 const studentModels = require("../models/student_models");
+const assessmentModels = require("../models/assessmentQuestions_models");
 
 // make students
 const makeStudent = async (req, res) => {
@@ -62,8 +63,38 @@ const getStudentsbyId = async (req, res) => {
   }
 };
 
+const addAssessmentToStudent = async (req, res) => {
+  const studentId = req.params.studentId;
+  const assessmentId = req.params.assessmentId;
+
+  try {
+    // Find the student by their ID
+    const student = await studentModels.findById(studentId);
+
+    if (!student) {
+      return res.status(404).json({ message: 'Student not found.' });
+    }
+
+    // Find the assessment by its ID
+    const assessment = await assessmentModels.findById(assessmentId);
+
+    if (!assessment) {
+      return res.status(404).json({ message: 'Assessment not found.' });
+    }
+
+    student.assessments.push(assessmentId)
+
+    // Continue with the association of the assessment with the student
+    // ...
+  } catch (error) {
+    console.error('Error associating assessment with student:', error);
+    res.status(500).json({ error: 'Failed to associate assessment with student' });
+  }
+};
+
 module.exports = {
   makeStudent,
   getStudents,
-  getStudentsbyId
+  getStudentsbyId,
+  addAssessmentToStudent
 };

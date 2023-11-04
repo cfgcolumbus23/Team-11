@@ -28,6 +28,6 @@ const rawAssessmentScoresSchema = new mongoose.Schema({
     recommendations: {
         type: String
     }
-})
+}, {timestamps: true})
 
 module.exports = mongoose.model("raw_assessment_scores", rawAssessmentScoresSchema)

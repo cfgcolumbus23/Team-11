@@ -4,6 +4,7 @@ const cors = require("cors");
 require("dotenv").config()
 
 const rawAssessmentScoresRouter = require("./routes/rawAssessmentScores_routes")
+const assessmentQuestionsRouter = require("./routes/assessmentQuestions_routes") 
 const userProfileRouter = require("./routes/user_profile_router")
 const studentRouter = require("./routes/studentRouter")
 
@@ -25,6 +26,7 @@ app.get('/', (req, res) => {
 })
 
 app.use("/api/rawAssessmentScores",rawAssessmentScoresRouter)
+app.use("/api/assessmentQuestions",assessmentQuestionsRouter)
 app.use("/api/userProfile", userProfileRouter)
 app.use("/api/student", studentRouter)
 

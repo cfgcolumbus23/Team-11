@@ -38,7 +38,7 @@ export function StudentList() {
       okType: "danger",
       onOk: () => {
         setData(data.filter((student) => student._id !== record._id));
-        // send a request to the server to delete the record as of right now it's
+        // send a request to the server to delete the record
       },
     });
   };
@@ -88,6 +88,9 @@ export function StudentList() {
 
   return (
     <div>
+      <div style={{ textAlign: 'right', marginBottom: '20px' }}>
+        <Button type="primary" href="/add-student">Add a Student</Button>
+      </div>
       <Table columns={columns} dataSource={data} />
       <ContactModal isModalOpen={isModalOpen} onOk={handleOkCancel} onCancel={handleOkCancel} student={currentRecord} />
       {isEditing && (
@@ -95,7 +98,6 @@ export function StudentList() {
         // replace the comment with actual JSX or another React component
         <div>Edit Student Form Placeholder</div>
       )}
-      <Button type="primary" href="/add-student">Add a Student</Button>
     </div>
   );
 }

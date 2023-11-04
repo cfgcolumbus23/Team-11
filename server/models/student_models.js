@@ -1,4 +1,5 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const rawAssessmentScores_models = require("./rawAssessmentScores_models");
 
 const studentSchema = new mongoose.Schema({
     firstName: {
@@ -28,8 +29,12 @@ const studentSchema = new mongoose.Schema({
     relationshipToStudent: {
         type: String,
         required: true
-    }
-
-}, {timestamps: true});
+    },
+    assessments: [
+        {
+           testId: String,
+        },
+    ],
+},{timestamps: true});
 
 module.exports = mongoose.model("student", studentSchema)

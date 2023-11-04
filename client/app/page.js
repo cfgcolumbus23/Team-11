@@ -23,23 +23,10 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            Student List{' '}
+            Student Registry{' '}
           </h2>
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
             View the students in your class
-          </p>
-        </Link>
-
-        <Link
-          href="recommendations"
-          className="text-black group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Recommendations{' '}
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Given a student and their scores, give resources
           </p>
         </Link>
 

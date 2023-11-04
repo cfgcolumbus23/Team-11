@@ -1,7 +1,8 @@
+"use client";
 import React from 'react';
-import { Table, Button } from 'antd';
+import { Table, Button, Space } from 'antd';
 
-export default function StudentReports() {
+export function StudentList() {
   const columns = [
     {
       title: 'First Name',
@@ -32,14 +33,14 @@ export default function StudentReports() {
       title: 'Actions',
       key: 'actions',
       render: () => (
-        <span>
+        <Space>
           <Button type="primary">
             View Report
           </Button>
           <Button type="default" onClick={() => reportButtonAction(record)}>
-            Custom Action
+            Student Contact
           </Button>
-        </span>
+        </Space>
       ),
     },
   ];

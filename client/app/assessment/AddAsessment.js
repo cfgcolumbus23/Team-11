@@ -14,8 +14,7 @@ export function AddAsessment({ testId }){
     const [questions, setQuestions] = useState([]);
     useEffect(() => {
         axios.get("http://localhost:3001/api/assessmentQuestions/" + testId).then((response) => {
-            console.log(response.data);
-            setQuestions(response.data);
+            setQuestions(response.data.questions);
         });
     }, [axios, testId]);
     const onFinish = (values) => {
@@ -94,7 +93,7 @@ export function AddAsessment({ testId }){
                 },
             ]}
         >
-            <InputNumber max={question.totalPoints} step={question.pointsIncrement} />
+            <InputNumber min={0} max={question.totalPoints} step={question.pointsIncrement} />
         </Form.Item>
         ))
     }

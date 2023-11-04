@@ -34,7 +34,7 @@ const studentSchema = new mongoose.Schema({
         {
            testId: String,
         },
-    ],
+    ]
 },{timestamps: true});
 
 module.exports = mongoose.model("student", studentSchema)

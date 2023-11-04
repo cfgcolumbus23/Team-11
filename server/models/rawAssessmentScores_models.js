@@ -5,6 +5,10 @@ const rawAssessmentScoresSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    testId: {
+        type: String,
+        required: true
+    },
     date: {
         type: Date,
         required: true

@@ -1,10 +1,24 @@
 "use client";
+import React from 'react';
 import { useState } from "react";
 import { Select } from 'antd';
 import { AddAsessment } from './AddAsessment';
+import { Form, Input, Button, InputNumber, DatePicker } from "antd"
 const testIds = ["1", "2"];
+const onFinish = () => {
+    console.log("You submitted succesfully!");
+}
+const onFinishFailed = () => {
+    console.error("There was an error in the submission!!");
+}
 export default function Assessment() {
     const [selectedTest, setSelectedTest] = useState("1");
+    const formRef = React.useRef(null);
+    const onFinish = (values) => {
+        axios.post("http://localhost:3001/api/rawAssessmentScores", values).then((response) => {
+            console.log("Server response " + response)
+        })
+    };
     return (
         <div>
             <Form name="basic"

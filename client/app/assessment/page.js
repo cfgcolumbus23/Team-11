@@ -17,7 +17,6 @@ export default function Assessment() {
     };
     return (
         <div>
-            <p>Please input something :)</p>
             <Form name="basic"
                 ref={formRef}
                 labelCol={{ span: 8 }}

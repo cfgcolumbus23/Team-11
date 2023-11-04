@@ -20,6 +20,18 @@ export default function Assessment() {
                 autoComplete="off">
                 <h1>Form</h1>
                 <Form.Item
+                    label="Child's Name"
+                    name="childName"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your child\'s name!',
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
                     label="Personal Data Recognition"
                     name="personalDataRec"
                     rules={[

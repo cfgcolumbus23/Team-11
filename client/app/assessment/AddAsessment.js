@@ -53,7 +53,7 @@ export function AddAsessment({ testId }){
     onFinish={onFinish}
     onFinishFailed={onFinishFailed}
     autoComplete="off">
-    <h1>Form</h1>
+    <h1>{testId+" Test"}</h1>
     <Form.Item
         label="Student"
         name="studentId"

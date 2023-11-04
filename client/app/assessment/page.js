@@ -16,10 +16,10 @@ export default function Assessment() {
     const [selectedTest, setSelectedTest] = useState(null);
     return (
         <div>
-            <p>Please input something :)</p>
+            <p>Please Select a Brigance Test</p>
             <Select style={{width:200}} value={selectedTest} onChange={(val) => setSelectedTest(val)}
             options={allowedTestIds.map(testId => ({
-                label: `Test ${testId}`,
+                label: `${testId} Test`,
                 value: testId,
             }))}/>
             {selectedTest === null ? "" : <AddAsessment testId={selectedTest}/>}

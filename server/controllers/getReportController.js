@@ -79,8 +79,6 @@ const getreport = (questions, answersList) => {
             "Socialemotional":social_percent
         };
         return ({recommendations,results})
-        console.log(recommendations)
-        console.log(results)
         //res.status(200).json({recommendations, results});
     } catch (error) {
        // res.status(400).json({error:error.message});

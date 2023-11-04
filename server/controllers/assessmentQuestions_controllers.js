@@ -4,19 +4,13 @@ const assessmentQuestionsModel = require("../models/assessmentQuestions_models")
 const addAssessmentQuestion = async (req, res) => {
     const {
         testId,
-        question,
-        pointsIncrement,
-        totalPoints,
-        questionCategory
+        questions
     } = req.body
 
     try {
         const assessmentQuestion = await assessmentQuestionsModel.create({
             testId,
-            question,
-            pointsIncrement,
-            totalPoints,
-            questionCategory
+            questions
         })
         res.status(200).json(assessmentQuestion)
     } catch (error) {
@@ -31,7 +25,7 @@ const getAssessmentQuestions = async (req, res) => {
     try{
         const assessmentQuestions = await assessmentQuestionsModel.find({testId})
 
-        res.status(200).json(assessmentQuestions)
+        res.status(200).json({assessmentQuestions: assessmentQuestions.questions})
     }catch(error){
         res.status(400).json({error: error.message})
     }

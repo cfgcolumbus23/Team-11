@@ -37,7 +37,7 @@ export function AddAsessment({ testId }){
     }, [axios, testId]);
     const onFinish = (values) => {
         success();
-        axios.post("http://localhost:3001/api/rawAssessmentScores", {testId, ...values}).then((response) => {
+        axios.post("http://localhost:3001/api/rawAssessmentScores", {studentId, testId, ...values}).then((response) => {
             console.log("Server response " + response)
         });
         
@@ -54,25 +54,7 @@ export function AddAsessment({ testId }){
     onFinish={onFinish}
     onFinishFailed={onFinishFailed}
     autoComplete="off">
-    <h1>{testId+" Test"}</h1>
-    <Form.Item
-        label="Student"
-        name="studentId"
-        rules={[
-            {
-                required: true,
-                message: 'Please select a student from a dropdown',
-            },
-        ]}
-    >
-        <Select defaultValue={studentId} options={
-            [{
-                label: `${student.firstName} ${student.lastName}`,
-                value: studentId,
-                //For indicating to user that a student is already selected
-            }]
-        }/>
-    </Form.Item>
+    <h1>{`${testId} Test for ${student.firstName} ${student.lastName}`}</h1>
     <Form.Item
         label="Date of exam"
         name="date"

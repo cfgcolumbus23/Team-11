@@ -23,11 +23,6 @@ export function StudentList() {
       key: 'lastName',
     },
     {
-      title: 'Birth Date',
-      dataIndex: 'DOB',
-      key: 'birthDate',
-    },
-    {
       title: 'Actions',
       key: 'actions',
       render: (record) => (

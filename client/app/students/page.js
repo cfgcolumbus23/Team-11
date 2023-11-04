@@ -1,5 +1,6 @@
 import React from 'react';
 import { StudentList } from './StudentList';
+import { AddStudent } from './AddStudent';
 export default function StudentReports() {
   return (
     <div>

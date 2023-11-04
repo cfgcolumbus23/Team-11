@@ -14,10 +14,14 @@ import Link from 'next/link';
 import Image from 'next/image';
 const inter = Inter({ subsets: ['latin'] })
 const links = ["home","add-student"];
-const items = links.map((val, i) => ({
-  "key": i + 1,
-  "label": <Link href={val === "home" ? "/" : `/${val}`}>{val}</Link>
-}));
+const items = [{
+  key: 1, 
+  label: <Link href="/">Home</Link>
+},
+{
+  key: 2,
+  label: <Link href="/add-student">Add Student</Link>
+}]
 export default function RootLayout({ children }) {
   return (
     <ConfigProvider locale={es} theme={{

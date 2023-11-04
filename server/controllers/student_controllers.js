@@ -1,5 +1,6 @@
 const studentModels = require("../models/student_models");
 
+// make students
 const makeStudent = async (req, res) => {
   const { 
     firstName, 
@@ -20,6 +21,22 @@ const makeStudent = async (req, res) => {
   }
 };
 
+// Get a list of students
+const getStudents = async (req, res) => {
+  try {
+    const students = await studentModels.find({});
+    
+    if (students.length === 0) {
+      return res.status(404).json({ message: 'No students found.' });
+    }
+    res.status(200).json(students);
+  } catch (error) {
+    console.error('Error getting students:', error);
+    res.status(500).json({ error: 'Failed to retrieve students' });
+  }
+};
+
 module.exports = {
   makeStudent,
+  getStudents,
 };

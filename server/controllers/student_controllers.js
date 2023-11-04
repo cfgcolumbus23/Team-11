@@ -62,7 +62,7 @@ const getStudentsbyId = async (req, res) => {
   }
 };
 
-function AssessmentToStudent(studentId, assessmentId){
+function addAssessmentToStudent(studentId, assessmentId){
   
     // Find the student by their ID
     const student = studentModels.findById(studentId);

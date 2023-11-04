@@ -2,7 +2,7 @@
 import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
-import { Form, Input, Button, InputNumber, DatePicker } from "antd"
+import { Form, Input, Button, InputNumber, DatePicker, Select } from "antd"
 const onFinish = () => {
     console.log("You submitted succesfully!");
 }
@@ -12,6 +12,15 @@ const onFinishFailed = () => {
 export function AddAsessment({ testId }){
     const formRef = React.useRef(null);
     const [questions, setQuestions] = useState([]);
+    const [allowedStudentIds, setAllowedStudentIds] = useState([]);
+    useEffect(() => {
+        axios.get("http://localhost:3001/api/student").then((response) => {
+            setAllowedStudentIds(response.data.map(data => ({
+                label: `${data.firstName} ${data.lastName}`,
+                value: data._id,
+            })))
+        });
+    }, [axios, testId]);
     useEffect(() => {
         axios.get("http://localhost:3001/api/assessmentQuestions/" + testId).then((response) => {
             setQuestions(response.data.questions);
@@ -34,16 +43,16 @@ export function AddAsessment({ testId }){
     autoComplete="off">
     <h1>Form</h1>
     <Form.Item
-        label="Student ID (TODO)"
+        label="Student"
         name="studentId"
         rules={[
             {
                 required: true,
-                message: 'Please input your child\'s name!',
+                message: 'Please select a student from a dropdown',
             },
         ]}
     >
-        <Input />
+        <Select options={allowedStudentIds}/>
     </Form.Item>
     <Form.Item
         label="Date of exam"

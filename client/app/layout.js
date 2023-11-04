@@ -15,7 +15,7 @@ const inter = Inter({ subsets: ['latin'] })
 const links = ["home", "assessment", "contact", "recommendations", "students"];
 const items = links.map((val, i) => ({
   "key": i + 1,
-  "label": <Link href={val === "home" ? "/" : val}>{val}</Link>
+  "label": <Link href={val === "home" ? "/" : `/${val}`}>{val}</Link>
 }));
 export default function RootLayout({ children }) {
   return (

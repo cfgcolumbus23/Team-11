@@ -4,12 +4,12 @@ import { Table, Button } from 'antd';
 export default function StudentReports() {
   const columns = [
     {
-      title: 'FirstName',
+      title: 'First Name',
       dataIndex: 'firstName',
       key: 'firstName',
     },
     {
-      title: 'LastName',
+      title: 'Last Name',
       dataIndex: 'lastName',
       key: 'lastName',
     },
@@ -28,20 +28,20 @@ export default function StudentReports() {
       dataIndex: 'studentInfo',
       key: 'studentInfo',
     },
-    // {
-    //   title: 'Actions',
-    //   key: 'actions',
-    //   render: (_, record) => (
-    //     <span>
-    //       <Button type="primary" onClick={() => handleViewReport(record)}>
-    //         View Report
-    //       </Button>
-    //       <Button type="default" onClick={() => handleCustomAction(record)}>
-    //         Custom Action
-    //       </Button>
-    //     </span>
-    //   ),
-    // },
+    {
+      title: 'Actions',
+      key: 'actions',
+      render: () => (
+        <span>
+          <Button type="primary">
+            View Report
+          </Button>
+          <Button type="default" onClick={() => reportButtonAction(record)}>
+            Custom Action
+          </Button>
+        </span>
+      ),
+    },
   ];
 
   const data = [
@@ -71,19 +71,13 @@ export default function StudentReports() {
     },
   ];
 
-  const handleViewReport = (record) => {
-    // Handle the action when the "View Report" button is clicked for a specific record
-    console.log(`Viewing report for ${record.firstName} ${record.lastName}`);
-  };
-
-  const handleCustomAction = (record) => {
-    // Handle your custom action when the custom button is clicked for a specific record
+  const reportButtonAction = (record) => {
+    // when the 'view report' button is clicked for a specific student record
     console.log(`Custom action for ${record.firstName} ${record.lastName}`);
   };
 
   return (
     <div>
-      <p>Here are all of your students</p>
       <h2>Student Reports</h2>
       <Table columns={columns} dataSource={data} />
     </div>

@@ -5,8 +5,8 @@ const rawAssessmentScoresSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    question1_score: {
-        type: Number,
+    question_scores: {
+        type: Array,
         required: true
     }
 })

@@ -4,17 +4,27 @@ const rawAssessmentScoresModel = require("../models/rawAssessmentScores_models")
 const addRawAssesmentScore = async (req, res) => {
     const {
         studentId,
-        question1_score
+        date,
+        school,
+        teacher,
+        question_scores,
+        observations,
+        recommendations
     } = req.body
 
-    try{
+    try {
         const rawAssessmentScore = await rawAssessmentScoresModel.create({
             studentId,
-            question1_score
+            date,
+            school,
+            teacher,
+            question_scores,
+            observations,
+            recommendations
         })
         res.status(200).json(rawAssessmentScore)
-    }catch(error){
-        res.status(400).json({error: error.message})
+    } catch (error) {
+        res.status(400).json({ error: error.message })
     }
 }
 

@@ -5,7 +5,7 @@ import axios from "axios";
 import { useState } from 'react';
 export default function Home() {
   const [result, setResult] = useState("Loading...");
-  axios.get("http://localhost:7000/").then((response) => {
+  axios.get("http://localhost:3001/").then((response) => {
     setResult(response.data);
   }).catch((reason) => {
     console.error("Error when connecting to server: " + reason);
@@ -47,7 +47,6 @@ export default function Home() {
         <Link
           href="assessment"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100"
-          target="_blank"
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
@@ -61,10 +60,9 @@ export default function Home() {
           </p>
         </Link>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+        <Link
+          href="students"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100"
-          target="_blank"
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
@@ -76,12 +74,11 @@ export default function Home() {
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
             View the students in your class
           </p>
-        </a>
+        </Link>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+        <Link
+          href="recommendations"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100"
-          target="_blank"
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
@@ -93,12 +90,11 @@ export default function Home() {
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
             Given a student and their scores, give resources
           </p>
-        </a>
+        </Link>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+        <Link
+          href="contact"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100"
-          target="_blank"
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
@@ -110,7 +106,7 @@ export default function Home() {
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
             Send message to parent for student
           </p>
-        </a>
+        </Link>
 
         <p>{result}</p>
       </div>

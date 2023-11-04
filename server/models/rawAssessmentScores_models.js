@@ -5,9 +5,28 @@ const rawAssessmentScoresSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    question1_score: {
-        type: Number,
+    date: {
+        type: Date,
         required: true
+    },
+    school: {
+        type: String,
+        required: true
+    },
+    teacher: {
+        type: String,
+        required: true
+    },
+    question_scores: {
+        type: Array,
+        required: true
+    },
+    observations: {
+        type: String,
+        required: true
+    },
+    recommendations: {
+        type: String
     }
 })
 

@@ -1,6 +1,7 @@
 "use client";
 import { usePathname } from 'next/navigation'
 import { Progress } from 'antd';
+import Plot from 'react-plotly.js';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Table } from 'antd';
@@ -26,10 +27,43 @@ export default function Report() {
             key: 'category',
         },
         {
+            title: 'Plot',
+            dataIndex: 'plotValues',
+            key: 'plotValues',
+            render: (plotValues) => {
+                console.log(plotValues);
+            return <div className="h-[150px] overflow-hidden positive-relative">
+                <Plot
+                className="absolute top-[-56%]"
+                data={[
+                {
+                    x: Array.from({ length: plotValues.length }, (v, i) => i),
+                    y: plotValues,
+                    type: 'scatter',
+                },
+                ]}
+                layout={ {width: 320, height: 300,
+                    xaxis: {
+                        visible:false,
+                    },
+                    yaxis: {
+                        range:[0,100]    
+                    },
+                paper_bgcolor: 'rgba(0,0,0,0)', // Transparent background
+                plot_bgcolor: 'rgba(0,0,0,0)', // Transparent background
+                }}
+                config={{
+                    displayModeBar: false,
+                    staticPlot: true
+                }}
+            />
+          </div>},
+        },
+        {
             title: 'Results',
             dataIndex: 'results',
             key: 'results',
-            render: (text) => <div className="relative pt-2"> {/* pt-2 or any other padding class to give space for the tick */}
+            render: (text) => <div className="relative pt-2 w-44"> {/* pt-2 or any other padding class to give space for the tick */}
             <Progress strokeColor={"#37B672"} percent={text} showInfo={false} />
             
             {/* Tick mark at 50% */}
@@ -56,34 +90,38 @@ export default function Report() {
             setResponses(response.data.results);
         });
     }, [axios])
-    console.log(responses);
     const response = responses[responses.length - 1];
     const data = [
         {
             key: "Math",
+            plotValues: responses.map(response => response.results.Math),
             category: "Math",
             results: response.results.Math,
             recommendations: response.recommendations.Math,
         },
         {
             key: "Reading",
+            plotValues: responses.map(response => response.results.Reading),
             category: "Reading",
             results: response.results.Reading,
             recommendations: response.recommendations.Reading,
         },
         {
             key: "Physical",
+            plotValues: responses.map(response => response.results.Physical),
             category: "Physical",
             results: response.results.Physical,
             recommendations: response.recommendations.Physical,
         },
         {
             key: "Socialemotional",
+            plotValues: responses.map(response => response.results.Socialemotional),
             category: "Socialemotional",
             results: response.results.Socialemotional,
             recommendations: response.recommendations.Socialemotional,
         },
     ]
+
     return (
         <div>
             <h3>Report</h3>

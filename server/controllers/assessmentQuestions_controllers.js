@@ -34,10 +34,7 @@ const getAssessmentQuestions = async (req, res) => {
 const getAssessmentIds = async (req, res) => {
     try{
         const assessments = await assessmentQuestionsModel.find()
-        const assessmentIds = []
-        assessments.map((assessment) => {
-            assessmentIds.push(assessment.testId)
-        })
+        const assessmentIds = assessments.map((assessment) => assessment.testId)
         res.status(200).json(assessmentIds)
     }catch(error){
         res.status(400).json({error: error.message})

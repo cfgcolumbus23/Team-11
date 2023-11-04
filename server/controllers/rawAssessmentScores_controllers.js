@@ -1,5 +1,5 @@
 const rawAssessmentScoresModel = require("../models/rawAssessmentScores_models")
-const studentController = require("../controllers/student_controllers")
+const {addAssessmentToStudent} = require("../controllers/student_controllers")
 
 //Add
 const addRawAssesmentScore = async (req, res) => {

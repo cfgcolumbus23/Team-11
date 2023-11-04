@@ -1,11 +1,44 @@
-const rawAssessmentScoresModel = require("../models/assessmentQuestions_models");
+const assessmentQuestionsModel = require("../models/assessmentQuestions_models");
+const rawAssessmentScoresModel = require("../models/rawAssessmentScores_models");
 
 const getreport = async (req, res) => {
     const {studentId} = req.params;
     try {
         const assessmentScores = await rawAssessmentScoresModel.findOne({studentId});
-        console.log(assessmentScores);
-        res.status(200).json({questionScores:rawAssessmentScoresModel.question_scores});
+        const testId = 2;//assessmentScores.testId;
+        const questions = await assessmentQuestionsModel.findOne({testId});
+        const answersList = assessmentScores.question_scores;
+        
+        math_points = 0;
+        physical_points = 0;
+        social_points = 0;
+        reading_points = 0;
+
+        math_score_student = 0;
+        physical_score_student = 0;
+        social_score_student = 0;
+        reading_score_student = 0;
+
+        questions.questions.forEach((element, i) => {
+            curr_category = element.questionCategory;
+            curr_points = element.totalPoints;
+
+            if (curr_category == "math") {
+                math_points += curr_points;
+                math_score_student += answersList[i];
+            } else if (curr_category == "reading") {
+                reading_points += curr_points;
+                reading_score_student += answersList[i];
+            } else if (curr_category == "physical") {
+                physical_points += curr_points;
+                physical_score_student += answersList[i];
+            } else {
+                social_points += "socialemotional";
+                social_score_student += answersList[i];
+            }
+        })
+
+        res.status(200).json({reading_score_student});
     } catch (error) {
         res.status(400).json({error:error.message});
     }
@@ -17,10 +50,6 @@ module.exports = {
 
 // const categorizing = () => {
 
-//     const physical_total = array[5] + array[8];
-//     const social_total = array[0] + array[7] + array[2];
-//     const math_total = array[9] + array[6];
-//     const reading_total = array[1] + array[3] + array[4] + array[10] + array[11];
 //     const recommendations = new Array(4);
 
 //     if (physical_total <= 8) {

@@ -2,7 +2,7 @@
 export default function Recommendations() {
     return (
         <div>
-            Recommendations
+            Recommendations hey
         </div>
     )
 }

@@ -136,7 +136,8 @@ export default function Report() {
     
     return (
         <div>
-            <h3>Report</h3>
+            <h2>Report Dashboard</h2>
+            <p>Track and compare student progress, report results, and recommended resources</p>
             <Table dataSource={data} columns={columns} />
         </div>
     );

@@ -4,6 +4,7 @@ const rawAssessmentScoresModel = require("../models/rawAssessmentScores_models")
 const addRawAssesmentScore = async (req, res) => {
     const {
         studentId,
+        testId,
         date,
         school,
         teacher,
@@ -15,6 +16,7 @@ const addRawAssesmentScore = async (req, res) => {
     try {
         const rawAssessmentScore = await rawAssessmentScoresModel.create({
             studentId,
+            testId,
             date,
             school,
             teacher,

@@ -24,22 +24,12 @@ const addAssessmentQuestion = async (req, res) => {
 
 //Get all assessment questions
 const getAssessmentQuestions = async (req, res) => {
-    const {testId}=req.body
+    const {testId}=req.params
 
     try{
         const assessmentQuestions = await assessmentQuestionsModel.find({testId})
 
-        const questionArray=[]
-        const incrementPointsArray=[]
-        const totalPointsArray=[]
-
-        assessmentQuestions.map((assessmentQuestion) => {
-            questionArray.push(assessmentQuestion.question)
-            incrementPointsArray.push(assessmentQuestion.pointsIncrement)
-            totalPointsArray.push(assessmentQuestion.totalPoints)
-        })
-
-        res.status(200).json({questionArray, incrementPointsArray, totalPointsArray})
+        res.status(200).json(assessmentQuestions)
     }catch(error){
         res.status(400).json({error: error.message})
     }

@@ -6,7 +6,7 @@ const {
 
 const router = express.Router()
 
-router.post("/add", addAssessmentQuestion)
-router.post("/get", getAssessmentQuestions)
+router.post("/", addAssessmentQuestion)
+router.get("/:testId", getAssessmentQuestions)
 
 module.exports = router

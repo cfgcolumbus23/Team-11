@@ -16,6 +16,10 @@ const assessmentQuestionsSchema = new mongoose.Schema({
     totalPoints: {
         type: Number,
         required: true
+    },
+    questionCategory: {
+        type: String,
+        required: true
     }
 }, {timestamps: true})
 

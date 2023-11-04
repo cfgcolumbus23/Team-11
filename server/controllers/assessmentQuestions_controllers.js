@@ -6,7 +6,8 @@ const addAssessmentQuestion = async (req, res) => {
         testId,
         question,
         pointsIncrement,
-        totalPoints
+        totalPoints,
+        questionCategory
     } = req.body
 
     try {
@@ -14,7 +15,8 @@ const addAssessmentQuestion = async (req, res) => {
             testId,
             question,
             pointsIncrement,
-            totalPoints
+            totalPoints,
+            questionCategory
         })
         res.status(200).json(assessmentQuestion)
     } catch (error) {

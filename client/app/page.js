@@ -5,7 +5,7 @@ import axios from "axios";
 import { useState } from 'react';
 export default function Home() {
   const [result, setResult] = useState("Loading...");
-  axios.get("http://localhost:7000/").then((response) => {
+  axios.get("http://localhost:3001/").then((response) => {
     setResult(response.data);
   }).catch((reason) => {
     console.error("Error when connecting to server: " + reason);

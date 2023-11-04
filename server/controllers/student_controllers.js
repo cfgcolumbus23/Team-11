@@ -62,12 +62,12 @@ const getStudentsbyId = async (req, res) => {
   }
 };
 
-function addAssessmentToStudent(studentId, assessmentId){
+const addAssessmentToStudent = async (studentId, assessmentId) => {
   
     // Find the student by their ID
-    const student = studentModels.findOne({studentId});
+    const student = await studentModels.findOne({_id:studentId});
     const assessmentIdList = student.assessments
-    assessmentIdList.push(assessmentId)
+    assessmentIdList.push(assessmentId.toString())
     const updatedStudent = studentModels.findOneAndUpdate({studentId},{assessments: assessmentIdList})
 
     if (!updatedStudent) {

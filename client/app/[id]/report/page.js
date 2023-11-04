@@ -58,6 +58,17 @@ export default function Report() {
     }, [axios])
     console.log(responses);
     const response = responses[responses.length - 1];
+    
+    //checker to make sure response.length is not 0
+    if (responses.length == 0) {
+        return (
+            <div>
+                <h3>Report</h3>
+                <p>There is no report for this student.</p>
+                <p>Press home to go back.</p>
+            </div>
+        );
+    }
     const data = [
         {
             key: "Math",

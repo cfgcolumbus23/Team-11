@@ -1,0 +1,19 @@
+Physical mobility resources (15 pts): {
+    <11: Moderately bad - physical therapy
+    <8: Pretty bad - neurologist
+}
+
+Social/Emotional Wellness (25pts) {
+    <18: Developmental doctor
+}
+
+Math literacy (15pts) {
+    <11: Math tutor
+    <8: Educational psychologist
+}
+
+Reading Literacy (45pts) {
+    <38: Local library
+    <33: Speech/Language pathologist
+    <28: Educatoinal Psychologist
+}

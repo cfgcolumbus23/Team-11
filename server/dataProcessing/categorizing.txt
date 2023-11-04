@@ -1,0 +1,38 @@
+{
+    1: knows personal info (10pts)
+    2: color recognition (10pts)
+    3: picture recognition (10pts)
+    4: visual recognition [shapes, upper vs. lowercase] (10pts)
+    5: visual to motor skills [can look at something and write it] (10pts)
+    6: gross motor skills (10pts)
+    7: counting (5pts)
+    8: identify body parts (5pts)
+    9: can follow verbal directions (5pts)
+    10: matching quantity to number (10pts)
+    11: can print first name (5pts)
+    12: syntax and fluency (10pts)
+}
+
+Physical mobility = {
+    6: gross motor skills (10pts)
+    9: can follow verbal directions (5pts)
+}
+
+social/emotional wellness = {
+    1: knows personal info (10pts)
+    8: identify body parts (5pts)
+    3: picture recognition (10pts)
+}
+
+Math literacy = {
+    10: matching quantity to number (10pts)
+    7: counting (5pts)
+}
+
+Reading Literacy = {
+    11: can print first name (5pts)
+    12: syntax and fluency (10pts)
+    5: visual to motor skills [can look at something and write it] (10pts)
+    2: color recognition (10pts)
+    4: visual recognition [shapes, upper vs. lowercase] (10pts)
+}

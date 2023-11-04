@@ -68,7 +68,7 @@ export function AddAsessment({ testId }){
         <Select defaultValue={studentId} options={
             [{
                 label: `${student.firstName} ${student.lastName}`,
-                value: studentId,
+                value: studentId
                 //For indicating to user that a student is already selected
             }]
         }/>

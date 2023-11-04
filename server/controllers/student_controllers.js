@@ -5,7 +5,11 @@ const makeStudent = async (req, res) => {
   const { 
     firstName, 
     lastName, 
-    DOB 
+    DOB,
+    contactFirstName,
+    contactLastName,
+    contactNumber,
+    relationshipToStudent
 } = req.body;
 
   try {
@@ -13,6 +17,10 @@ const makeStudent = async (req, res) => {
       firstName,
       lastName,
       DOB,
+      contactFirstName,
+      contactLastName,
+      contactNumber,
+      relationshipToStudent
     });
 
     res.status(200).json(student);

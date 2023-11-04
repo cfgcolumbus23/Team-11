@@ -1,37 +1,56 @@
-import React from 'react';
-import { Layout, Card, List } from 'antd';
+"use client";
+import React, { useEffect, useState } from 'react';
+import { Table, Button, Space } from 'antd';
+import axios from 'axios';
+import StudentModal from '../../components/StudentModal'; // Adjust the path to the correct one
 
-const studentsInfo = [
-  {
-    name: 'Water Bottle',
-    phoneNumber: 'jWB@example.com',
-  },
-  // add more student data here?? or add in dynamic
-];
+export function StudentList() {
+  const [data, setData] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedStudent, setSelectedStudent] = useState(null);
 
-const Student = ({ student }) => {
+  useEffect(() => {
+    axios.get("http://localhost:3001/api/student").then((response) => {
+      setData(response.data.map(data => ({...data, key: data._id})));
+    });
+  }, []);
+
+  const columns = [
+    {
+      title: 'Actions',
+      key: 'actions',
+      render: (record) => (
+        <Space>
+          <Button type="primary">
+            View Report
+          </Button>
+          <Button type="default" onClick={() => reportButtonAction(record)}>
+            Contact Info
+          </Button>
+        </Space>
+      ),
+    },
+  ];
+
+  const reportButtonAction = (record) => {
+    setSelectedStudent(record);
+    setIsModalVisible(true);
+  };
+
+  const handleClose = () => {
+    setIsModalVisible(false);
+  };
+
   return (
-    <Card title="Student Contavt Infoooo">
-      <List
-        dataSource={student}
-        renderItem={(item) => (
-          <List.Item>
-            <strong>Name:</strong> {item.name} <br />
-            <strong>Phone Number:</strong> {item.phoneNumber} <br />
-            {/* add other contact information here? */}
-          </List.Item>
-        )}
-      />
-    </Card>
+    <div>
+      <Table columns={columns} dataSource={data} />
+      {selectedStudent && (
+        <StudentModal
+          student={selectedStudent}
+          isVisible={isModalVisible}
+          handleClose={handleClose}
+        />
+      )}
+    </div>
   );
-};
-
-const StudentsPage = () => {
-  return (
-    <Layout>
-      <Student student={studentsInfo} />
-    </Layout>
-  );
-};
-
-export default StudentsPage;
+}

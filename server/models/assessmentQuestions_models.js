@@ -1,12 +1,8 @@
 const mongoose = require("mongoose")
 
-const assessmentQuestionsSchema = new mongoose.Schema({
-    testId: {
-        type: String,
-        required: true
-    },
+const questionSchema = new mongoose.Schema({
     question: {
-        type: String,
+        type: String, 
         required: true
     },
     pointsIncrement: {
@@ -21,6 +17,14 @@ const assessmentQuestionsSchema = new mongoose.Schema({
         type: String,
         required: true
     }
+})
+
+const assessmentQuestionsSchema = new mongoose.Schema({
+    testId: {
+        type: String,
+        required: true
+    },
+    questions: [questionSchema]
 }, {timestamps: true})
 
 module.exports = mongoose.model("assessment_questions", assessmentQuestionsSchema)

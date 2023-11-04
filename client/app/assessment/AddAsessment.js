@@ -22,6 +22,7 @@ export function AddAsessment({ testId }){
         axios.post("http://localhost:3001/api/rawAssessmentScores", {testId, ...values}).then((response) => {
             console.log("Server response " + response)
         });
+        
     };
     return (<Form name="basic"
     ref={formRef}

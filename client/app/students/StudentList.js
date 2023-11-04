@@ -20,16 +20,6 @@ export function StudentList() {
       key: 'birthDate',
     },
     {
-      title: 'Reports',
-      dataIndex: 'reportData',
-      key: 'reportData',
-    },
-    {
-      title: 'Student Information',
-      dataIndex: 'studentInfo',
-      key: 'studentInfo',
-    },
-    {
       title: 'Actions',
       key: 'actions',
       render: () => (
@@ -38,7 +28,7 @@ export function StudentList() {
             View Report
           </Button>
           <Button type="default" onClick={() => reportButtonAction(record)}>
-            Student Contact
+            Contact Info
           </Button>
         </Space>
       ),
@@ -79,7 +69,6 @@ export function StudentList() {
 
   return (
     <div>
-      <h2>Student Reports</h2>
       <Table columns={columns} dataSource={data} />
     </div>
   );

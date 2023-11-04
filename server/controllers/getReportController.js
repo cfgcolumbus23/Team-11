@@ -51,13 +51,13 @@ const getreport = async (req, res) => {
             "Math":recs.get("Math"),
             "Reading":recs.get("Reading"),
             "Physical":recs.get("Physical"),
-            "Social/Emotional":recs.get("Social/Emotional")
+            "Socialemotional":recs.get("Social/Emotional")
         };
         const results = {
             "Math":math_percent,
             "Reading":reading_percent,
             "Physical":physical_percent,
-            "Social/Emotional":social_percent
+            "Socialemotional":social_percent
         };
 
         res.status(200).json({recommendations, results});

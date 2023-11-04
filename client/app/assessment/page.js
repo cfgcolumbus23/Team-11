@@ -3,7 +3,7 @@ import React from 'react';
 import { useState } from "react";
 import { Select } from 'antd';
 import { AddAsessment } from './AddAsessment';
-const testIds = ["1", "2"];
+const testIds = ["Kindergarten", "2"];
 export default function Assessment() {
     const [selectedTest, setSelectedTest] = useState("1");
     return (

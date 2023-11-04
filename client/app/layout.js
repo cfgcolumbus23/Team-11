@@ -1,5 +1,5 @@
 "use client";
-import { ConfigProvider } from 'antd'
+import { ConfigProvider, Space } from 'antd'
 import es from 'antd/locale/en_US'
 import dayjs from 'dayjs'
 import 'dayjs/locale/es-us'
@@ -11,6 +11,7 @@ import { Header } from 'antd/es/layout/layout';
 import { Content } from 'antd/es/layout/layout';
 import { Menu } from 'antd';
 import Link from 'next/link';
+import Image from 'next/image';
 const inter = Inter({ subsets: ['latin'] })
 const links = ["home", "assessment", "contact", "recommendations", "students"];
 const items = links.map((val, i) => ({
@@ -24,12 +25,16 @@ export default function RootLayout({ children }) {
         <body className={inter.className}>
           <Layout>
             <Header style={{ alignItems: 'center' }}>
-            <Menu
-            defaultSelectedKeys={['1']}
-            theme="dark"
-            mode="horizontal"
-            items={items}
-            />
+              <div className="flex gap-10 items-center">
+                <Image src="/frfLogo.png" width={50} height={50}/> 
+                <Menu
+                className="flex-grow"
+                defaultSelectedKeys={['1']}
+                theme="dark"
+                mode="horizontal"
+                items={items}
+                />
+              </div>
             </Header>
             <Content style={{padding: '0 50px'}}>
               {children}

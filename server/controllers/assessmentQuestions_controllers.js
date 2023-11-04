@@ -24,7 +24,6 @@ const getAssessmentQuestions = async (req, res) => {
 
     try{
         const assessmentQuestions = await assessmentQuestionsModel.findOne({testId})
-        console.log(assessmentQuestions)
 
         res.status(200).json({questions: assessmentQuestions.questions})
     }catch(error){
@@ -32,7 +31,21 @@ const getAssessmentQuestions = async (req, res) => {
     }
 }
 
+const getAssessmentIds = async (req, res) => {
+    try{
+        const assessments = await assessmentQuestionsModel.find()
+        const assessmentIds = []
+        assessments.map((assessment) => {
+            assessmentIds.push(assessment.testId)
+        })
+        res.status(200).json(assessmentIds)
+    }catch(error){
+        res.status(400).json({error: error.message})
+    }
+}
+
 module.exports = {
     addAssessmentQuestion,
-    getAssessmentQuestions
+    getAssessmentQuestions,
+    getAssessmentIds
 }

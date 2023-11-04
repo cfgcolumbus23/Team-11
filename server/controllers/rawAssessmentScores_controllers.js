@@ -1,4 +1,5 @@
 const rawAssessmentScoresModel = require("../models/rawAssessmentScores_models")
+const studentController = require("../controllers/student_controllers")
 
 //Add
 const addRawAssesmentScore = async (req, res) => {
@@ -24,6 +25,7 @@ const addRawAssesmentScore = async (req, res) => {
             observations,
             recommendations
         })
+        addAssessmentToStudent(studentId, rawAssessmentScore._id)
         res.status(200).json(rawAssessmentScore)
     } catch (error) {
         res.status(400).json({ error: error.message })

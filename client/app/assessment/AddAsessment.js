@@ -2,14 +2,22 @@
 import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
-import { Form, Input, Button, InputNumber, DatePicker, Select } from "antd"
-const onFinish = () => {
-    console.log("You submitted succesfully!");
-}
-const onFinishFailed = () => {
-    console.error("There was an error in the submission!!");
-}
+import { Form, Input, Button, InputNumber, DatePicker, Select, message} from "antd"
+
 export function AddAsessment({ testId }){
+    const [messageApi, contextHolder] = message.useMessage();
+    const success = () => {
+        messageApi.open({
+            type: 'success',
+            content: 'Form submitted successfully',
+        });
+    };
+    const error = () => {
+        messageApi.open({
+            type: 'error',
+            content: 'There was an error in the submission!!',
+        });
+    };
     const formRef = React.useRef(null);
     const [questions, setQuestions] = useState([]);
     const [allowedStudentIds, setAllowedStudentIds] = useState([]);
@@ -27,10 +35,14 @@ export function AddAsessment({ testId }){
         });
     }, [axios, testId]);
     const onFinish = (values) => {
+        success();
         axios.post("http://localhost:3001/api/rawAssessmentScores", {testId, ...values}).then((response) => {
             console.log("Server response " + response)
         });
         
+    };
+    const onFinishFailed = (values) => {
+        error();
     };
     return (<Form name="basic"
     ref={formRef}
@@ -126,10 +138,12 @@ export function AddAsessment({ testId }){
     </Form.Item>
 
     <Form.Item>
+        {contextHolder}
         <Button type="primary" htmlType="submit">
             Submit
         </Button>
     </Form.Item>
+
 
 </Form>);
 }

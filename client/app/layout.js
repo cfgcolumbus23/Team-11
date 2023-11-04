@@ -20,7 +20,11 @@ const items = links.map((val, i) => ({
 }));
 export default function RootLayout({ children }) {
   return (
-    <ConfigProvider locale={es}>
+    <ConfigProvider locale={es} theme={{
+      token: {
+        colorPrimary: '#37B672',
+      },
+    }}>
       <html lang="en">
         <body className={inter.className}>
           <Layout>

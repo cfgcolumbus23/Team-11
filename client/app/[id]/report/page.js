@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Table } from 'antd';
 export default function Report() {
-    const [response, setResponse] = useState({
+    const [responses, setResponses] = useState([{
         results:{
             Math: "Loading...",
             Reading: "Loading...",
@@ -18,7 +18,7 @@ export default function Report() {
             Physical: 0,
             Socialemotional: 0
         }
-    });
+    }]);
     const columns = [
         {
             title: 'Category',
@@ -30,7 +30,7 @@ export default function Report() {
             dataIndex: 'results',
             key: 'results',
             render: (text) => <div className="relative pt-2"> {/* pt-2 or any other padding class to give space for the tick */}
-            <Progress percent={text} showInfo={false} />
+            <Progress strokeColor={"#37B672"} percent={text} showInfo={false} />
             
             {/* Tick mark at 50% */}
             <div className="absolute -translate-x-1/2 -translate-y-1/2 h-3 top-[calc(50%-3px)]" style={{ left: '50%' }}>
@@ -53,9 +53,11 @@ export default function Report() {
     const studentId = pathname[pathname.length - 2];
     useEffect(() => {
         axios.get("http://localhost:3001/api/report/" + studentId).then((response) => {
-            setResponse(response.data);
+            setResponses(response.data.results);
         });
     }, [axios])
+    console.log(responses);
+    const response = responses[responses.length - 1];
     const data = [
         {
             key: "Math",

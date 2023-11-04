@@ -1,7 +1,7 @@
 import { AddStudent } from "./AddStudent";
 export default function AddStudentPage(){
     return (<div>
-        <p>Add a student!</p>
+        <h2>Add Students</h2>
         <AddStudent/>
     </div>);
 }

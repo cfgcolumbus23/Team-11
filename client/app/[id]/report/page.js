@@ -91,6 +91,17 @@ export default function Report() {
         });
     }, [axios])
     const response = responses[responses.length - 1];
+    
+    //checker to make sure response.length is not 0
+    if (responses.length == 0) {
+        return (
+            <div>
+                <h3>Report</h3>
+                <p>There is no report for this student.</p>
+                <p>Press home to go back.</p>
+            </div>
+        );
+    }
     const data = [
         {
             key: "Math",
@@ -119,9 +130,10 @@ export default function Report() {
             category: "Socialemotional",
             results: response.results.Socialemotional,
             recommendations: response.recommendations.Socialemotional,
-        },
+        }
     ]
 
+    
     return (
         <div>
             <h3>Report</h3>

@@ -43,7 +43,7 @@ export function StudentList() {
       key: 'actions',
       render: (record) => (
         <Space>
-          <Button type="primary">
+          <Button type="primary" disabled={!record.assessments.length}>
             <Link href={`/${record._id}/report`}>View Report</Link>
           </Button>
           <Button type="primary">

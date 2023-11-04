@@ -82,8 +82,9 @@ export default function Report() {
             category: "Socialemotional",
             results: response.results.Socialemotional,
             recommendations: response.recommendations.Socialemotional,
-        },
+        }
     ]
+    
     return (
         <div>
             <h3>Report</h3>

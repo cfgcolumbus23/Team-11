@@ -19,5 +19,4 @@ router.post("/", makeStudent)
 router.get("/", getStudents)
 
 router.get("/:studentId", getStudentsbyId)
-
 module.exports = router

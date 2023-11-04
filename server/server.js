@@ -7,6 +7,7 @@ const rawAssessmentScoresRouter = require("./routes/rawAssessmentScores_routes")
 const assessmentQuestionsRouter = require("./routes/assessmentQuestions_routes") 
 const userProfileRouter = require("./routes/user_profile_router")
 const studentRouter = require("./routes/studentRouter")
+const getReportRoutes = require("./routes/getReportRoutes")
 
 //Create app
 const app = express()
@@ -29,7 +30,7 @@ app.use("/api/rawAssessmentScores",rawAssessmentScoresRouter)
 app.use("/api/assessmentQuestions",assessmentQuestionsRouter)
 app.use("/api/userProfile", userProfileRouter)
 app.use("/api/student", studentRouter)
-
+app.use("/api/report", getReportRoutes)
 
 //Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)

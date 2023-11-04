@@ -41,6 +41,7 @@ export default function RootLayout({ children }) {
                 mode="horizontal"
                 items={items}
                 />
+                <span className="text-white">Welcome back, <b>Luke Trenaman</b></span>
               </div>
             </Header>
             <Content style={{padding: '0 50px'}}>
